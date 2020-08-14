@@ -12,28 +12,34 @@ const initialState = {
 
 export default function (state = initialState, action) {
   function decreasePizzaQuantity(payload, oldState) {
-    if (oldState[payload.title][payload.size].count > 1) {
-      oldState[payload.title][payload.size].count -= 1;
-      oldState.count -= 1;
-      oldState.total -= payload.price;
+    const oldStateCopy = { ...oldState };
+    if (oldStateCopy[payload.title][payload.size].count > 1) {
+      oldStateCopy[payload.title][payload.size].count -= 1;
+      oldStateCopy.count -= 1;
+      oldStateCopy.total -= payload.price;
     }
-    return oldState;
+    return oldStateCopy;
   }
   function increasePizzaQuantity(payload, oldState) {
-    oldState[payload.title][payload.size].count += 1;
-    oldState.count += 1;
-    oldState.total += payload.price;
-    return oldState;
+    console.log("payload");
+    console.log(payload);
+    console.log(oldState);
+    const oldStateCopy = { ...oldState };
+    oldStateCopy[payload.title][payload.size].count += 1;
+    oldStateCopy.count += 1;
+    oldStateCopy.total += payload.price;
+    return oldStateCopy;
   }
   function removePizzaFromCart(payload, oldState) {
-    const removedCount = oldState[payload.title][payload.size].count;
-    delete oldState[payload.title][payload.size];
-    if (Object.keys(oldState[payload.title]).length === 1) {
-      delete oldState[payload.title];
+    const oldStateCopy = { ...oldState };
+    const removedCount = oldStateCopy[payload.title][payload.size].count;
+    delete oldStateCopy[payload.title][payload.size];
+    if (Object.keys(oldStateCopy[payload.title]).length === 1) {
+      delete oldStateCopy[payload.title];
     }
-    oldState.count -= removedCount;
-    oldState.total -= removedCount * payload.price;
-    return oldState;
+    oldStateCopy.count -= removedCount;
+    oldStateCopy.total -= removedCount * payload.price;
+    return oldStateCopy;
   }
   function addPizzaToCart(payload, oldState) {
     let newPizza = {};

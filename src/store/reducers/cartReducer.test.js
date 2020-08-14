@@ -18,6 +18,23 @@ describe("cart reducer", () => {
       },
     },
   };
+  const stateWithAnItemIncreased = {
+    count: 2,
+    total: 20,
+    testItem: {
+      image: "4.png",
+      small: {
+        price: 10,
+        count: 2,
+      },
+    },
+  };
+
+  const actionPayloadNewItem = {
+    title: "testItem",
+    size: "small",
+    price: 10
+  };
 
   it("should return default state", () => {
     expect(cartReducer(undefined, {})).toEqual(initialState);
@@ -37,16 +54,20 @@ describe("cart reducer", () => {
   });
 
   it("should remove item from the cart", () => {
-    const actionPayload = {
-      title: "testItem",
-      size: "small",
-      price: 10
-    };
+  
     expect(
       cartReducer(stateWithAnItem, {
         type: constants.REMOVE_FROM_CART,
-        payload: actionPayload,
+        payload: actionPayloadNewItem,
       })
     ).toEqual(initialState);
+  });
+
+  it('should increase quantity of existing item in cart', () => {
+
+    console.log('state is ')
+    console.log(stateWithAnItem)
+    expect(cartReducer(stateWithAnItem, {type: constants.INCREASE_QUANTITY,payload: actionPayloadNewItem })).toEqual(stateWithAnItemIncreased)
+    
   });
 });
