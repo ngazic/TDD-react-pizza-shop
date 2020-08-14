@@ -1,24 +1,25 @@
-import {SET_PAGE_TITLE} from "../actions/types";
+import { SET_PAGE_TITLE } from "../actions/types";
 
 const initialState = {
   page: "Get it while it's hot",
-  link: ""
-}
+  link: "",
+};
 
-function page(state=initialState, action) {
+function page(state = initialState, action) {
+  action.type = action.type !== "undefined" ? action.type : "UNDEFINED";
   switch (action.type) {
-    case SET_PAGE_TITLE:
-      {
-        // debugger;
-        let newTitle = (action.payload !==undefined) ? {...state,...action.payload} : state;
-        if(newTitle.link === '') {
-          newTitle.page=initialState.page;
-        }
-        return newTitle;
+    case SET_PAGE_TITLE: {
+      // debugger;
+      let newTitle =
+        action.payload !== undefined ? { ...state, ...action.payload } : state;
+      if (newTitle.link === "") {
+        newTitle.page = initialState.page;
       }
-      default:{
-        return state;
-      }
+      return newTitle;
+    }
+    default: {
+      return state;
+    }
   }
 }
 

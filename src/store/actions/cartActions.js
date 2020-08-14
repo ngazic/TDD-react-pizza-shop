@@ -27,6 +27,7 @@ export function increaseQuantity(payload) {
     })
   }
 }
+
 export function decreaseQuantity(payload) {
   return (dispatch)=>{
     dispatch({

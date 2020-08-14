@@ -41,6 +41,7 @@ serve -s build
 
 ```
 npm install --save-dev enzyme enzyme-adapter-react-16 enzyme-to-json # Adding Enzyme utility for TDD 
+npm i redux-mock-store --save-dev # for testing store's middlewares for async actions (thunk)
 npm i react-select # For custom select elements
 npm install prettier -D --save-exact # VS code formetter 
 npm install body-scroll-lock # for preventing scrooling of elements
