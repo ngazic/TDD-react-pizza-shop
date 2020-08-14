@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React pizza shop ordering app
 
-## Available Scripts
+This is Test Driven Development (TDD) approach which implements Behavior Driven Development (BDD) in simple pizza ordering react application. 
 
-In the project directory, you can run:
+## Description
 
-### `yarn start`
+This simple demonstration app contains:
+1. State management using 'react-redux'
+2. Testing framework used is Jest with Enzyme utility 
+3. Routing implemented using 'react-router-dom'
+4. Global event bus could be implemented using some libraryes (e.i. [mitt](https://github.com/developit/mitt)), but I decided for simple custom implementation of Pub/Sub pattern using one global eventBus object
+5. Created global object "scrollLock" for handling body scroll lock for disabling scrolling when modals are opened. The same object implements logic for clearing body styles on resize event.
+6. Styles and theme taken from [Demo pizza theme](http://www.templatemonsterpreview.com/demo/78480.html?_ga=2.215933651.536897203.1595899832-1079675168.1595899832)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Development
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```
+npm install
+npm start #for starting the app in the browser
+npm run test #for running test in CLI
+```
+#### Configuring package.json scripts to build on Netlify and to run tests using Enzyme
+```
+...
+ "scripts": {
+    ...
+    "build": "CI= react-scripts build",
+    "test": "react-scripts test --setupFiles ./src/setupTests.js",
+    ...
+  },
+  ....
+```
+### Serving 
+```
+serve -s build
+```
+### Live version 
+[LINK](https://react-pizza.netlify.app)
 
-### `yarn test`
+### Third party libraries
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npm install --save-dev enzyme enzyme-adapter-react-16 enzyme-to-json # Adding Enzyme utility for TDD 
+npm i react-select # For custom select elements
+npm install prettier -D --save-exact # VS code formetter 
+npm install body-scroll-lock # for preventing scrooling of elements
+npm i react-responsive-carousel # Simple react carousel component
+```
 
-### `yarn build`
+## TODOS / Project ideas:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. Implement Home, Contact, About Us , Sign In / Up pages
+2. Mock data are simple js object, fetch data via REST API.
+3. Implement tests  (or replicate existing project using test driven development)
+4. Implement existing app in React Native
+5. Clean CSS (currently using some old theme css, can be written much cleaner)
+6. ...

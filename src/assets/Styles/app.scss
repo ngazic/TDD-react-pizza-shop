@@ -1,0 +1,29 @@
+/*------------------------------------------------------------------
+[Table of contents]
+
+- Breakpoints
+ - Imports
+
+-------------------------------------------------------------------*/
+
+
+/* ======= BREAKPOINTS ======= */
+
+$phone-max: 480px;
+$tablet-min: ($phone-max+1);
+$tablet-max: 768px;
+$laptop-min: ($tablet-max+1);
+$laptop-max: 992px;
+$desktop-min: ($laptop-max+1);
+$desktop-max: 1200px;
+$desktop-large: 1900px;
+
+/* ======= IMPORTS ======= */
+
+@import './icons.scss';
+@import './slidebars.scss';
+@import './color.scss';
+@import './sections.scss';
+@import './global.scss';
+@import './animations.scss';
+@import './responsive.scss';
