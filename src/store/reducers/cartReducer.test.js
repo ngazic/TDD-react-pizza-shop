@@ -33,7 +33,7 @@ describe("cart reducer", () => {
   const actionPayloadNewItem = {
     title: "testItem",
     size: "small",
-    price: 10
+    price: 10,
   };
 
   it("should return default state", () => {
@@ -54,7 +54,6 @@ describe("cart reducer", () => {
   });
 
   it("should remove item from the cart", () => {
-  
     expect(
       cartReducer(stateWithAnItem, {
         type: constants.REMOVE_FROM_CART,
@@ -63,11 +62,20 @@ describe("cart reducer", () => {
     ).toEqual(initialState);
   });
 
-  it('should increase quantity of existing item in cart', () => {
-
-    console.log('state is ')
-    console.log(stateWithAnItem)
-    expect(cartReducer(stateWithAnItem, {type: constants.INCREASE_QUANTITY,payload: actionPayloadNewItem })).toEqual(stateWithAnItemIncreased)
-    
+  it("should increase quantity of an existing item in the cart", () => {
+    expect(
+      cartReducer(stateWithAnItem, {
+        type: constants.INCREASE_QUANTITY,
+        payload: actionPayloadNewItem,
+      })
+    ).toEqual(stateWithAnItemIncreased);
+  });
+  it("should decrease quantity of the item", () => {
+    expect(
+      cartReducer(stateWithAnItemIncreased, {
+        type: constants.DECREASE_QUANTITY,
+        payload: actionPayloadNewItem,
+      })
+    ).toEqual(stateWithAnItem);
   });
 });

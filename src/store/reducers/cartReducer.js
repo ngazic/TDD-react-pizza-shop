@@ -11,8 +11,11 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
+  function deepCopyObject(sourceObject) {
+    return JSON.parse(JSON.stringify(sourceObject));
+  }
   function decreasePizzaQuantity(payload, oldState) {
-    const oldStateCopy = { ...oldState };
+    const oldStateCopy = deepCopyObject(oldState);
     if (oldStateCopy[payload.title][payload.size].count > 1) {
       oldStateCopy[payload.title][payload.size].count -= 1;
       oldStateCopy.count -= 1;
@@ -21,17 +24,14 @@ export default function (state = initialState, action) {
     return oldStateCopy;
   }
   function increasePizzaQuantity(payload, oldState) {
-    console.log("payload");
-    console.log(payload);
-    console.log(oldState);
-    const oldStateCopy = { ...oldState };
+    const oldStateCopy = deepCopyObject(oldState);
     oldStateCopy[payload.title][payload.size].count += 1;
     oldStateCopy.count += 1;
     oldStateCopy.total += payload.price;
     return oldStateCopy;
   }
   function removePizzaFromCart(payload, oldState) {
-    const oldStateCopy = { ...oldState };
+    const oldStateCopy = deepCopyObject(oldState);
     const removedCount = oldStateCopy[payload.title][payload.size].count;
     delete oldStateCopy[payload.title][payload.size];
     if (Object.keys(oldStateCopy[payload.title]).length === 1) {
@@ -64,7 +64,7 @@ export default function (state = initialState, action) {
 
     oldState.hasOwnProperty("total")
       ? (newPizza.total = oldState.total + payload.price)
-      : (newPizza.total = oldState.total = payload.price);
+      : (newPizza.total = payload.price);
 
     return newPizza;
   }
