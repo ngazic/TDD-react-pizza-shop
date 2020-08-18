@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 import Cart from "./Cart";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-// import { eventBus } from "../../eventBus";
+import { eventBus } from "../../helpers/eventBus";
 
 export class Header extends Component {
   constructor(props) {
@@ -19,13 +19,15 @@ export class Header extends Component {
     this.cartBtn = this.cartBtn.bind(this);
     this.animateCart = this.animateCart.bind(this);
   }
-  // componentDidMount() {
-  //   eventBus.on("animateCart", this.animateCart);
-  // }
-  // componentWillUnmount() {
-  //   eventBus.remove("animateCart", this.animateCart);
-  // }
+  componentDidMount() {
+    eventBus.on("animateCart", this.animateCart);
+  }
+  componentWillUnmount() {
+    console.log('========unmounting===========')
+    eventBus.remove("animateCart", this.animateCart);
+  }
   animateCart() {
+    console.log('=========animate===========')
     this.setState({
       animate: true,
     });
@@ -71,9 +73,9 @@ export class Header extends Component {
               }}
             ></i>
           </span>
-          <Link className="logo" to="/">
+          {/* <Link className="logo" to="/">
             <img className="img-responsive" src={logo} alt="Logo" />
-          </Link>
+          </Link> */}
           <span
             className="header-basket"
             onClick={() => {
